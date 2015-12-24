@@ -1,0 +1,4 @@
+- Sendgrid -> https://sendgrid.com/marketing/sendgrid-services
+- Rackspace (MailGun??) -> https://www.mailgun.com/pricing
+- Sparkpost -> https://www.sparkpost.com/pricing
+- Twilio 

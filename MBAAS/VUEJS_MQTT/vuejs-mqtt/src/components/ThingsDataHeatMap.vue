@@ -17,16 +17,23 @@
         components: {},
         watch: {},
         events: {
-            'new-data': function (data) {
+            'new-data': function (type, mydata) {
                 // New data comes in ... from parent compoenent ...
-                console.error("NEW DATA INCOMING ....", util.inspect(data, {depth: 10}))
+                console.error("NEW DATA INCOMING ....", util.inspect(mydata, {depth: 10}))
+                // Fill in the latest data
+
+                // Increase the accumulated data
             }
         },
         data () {
-            return {}
+            return {
+                latest_data: null,
+                accumulated_data: null
+            }
         },
         ready () {
 
+            // Put some fake data; render it as heatmap ..
         },
         methods: {},
         computed: {}

@@ -1,19 +1,37 @@
 <style scoped>
+
+    .node-card {
+        background-color: #00d4b4;
+    }
+
+    .node-alive {
+        background-color: yellowgreen;
+    }
+
+    .node-dead {
+        background-color: red;
+    }
+
 </style>
 
 <template>
-    <div>
-        <h3>PIR</h3>
-        {{ data.pir }}
+
+    <div class="node-card" :class="(liveliness == 'alive') ? 'node-alive' : 'node-dead' ">
+        <h2>State: {{ state }}</h2>
+        <div>
+            <h3>PIR</h3>
+            {{ data.pir }}
+        </div>
+        <div>
+            <h3>DOOR</h3>
+            {{ data.door }}
+        </div>
+        <div>
+            RAW: {{ (raw == null || raw == undefined ) ? '' : raw | json }}
+            <button @click="refreshData()">Refresh</button>
+        </div>
     </div>
-    <div>
-        <h3>DOOR</h3>
-        {{ data.door }}
-    </div>
-    <div>
-        RAW: {{ (raw == null || raw == undefined ) ? '' : raw | json }}
-        <button @click="refreshData()">Refresh</button>
-    </div>
+
 </template>
 
 <script>
@@ -30,7 +48,7 @@
         events: {
             'new-data': function (type, mydata) {
                 // New data comes in ... from parent compoenent ...
-                console.error("NEW DATA TYPE: %s .... %s", type, util.inspect(data, {depth: 10}))
+                console.error("NEW DATA TYPE: %s .... %s", type, util.inspect(mydata, {depth: 10}))
                 this.data = mydata
             }
         },
@@ -56,6 +74,13 @@
         methods: {
             refreshData () {
                 console.error("In refreshData ..")
+                if (this.liveliness == "alive") {
+                    this.liveliness = "dead"
+                } else {
+                    this.liveliness = "alive"
+
+                }
+                /*
                 if (this.influxdb == null || this.influxdb == undefined) {
                     console.error("Nothing to Do ...")
                 } else {
@@ -64,6 +89,7 @@
                         console.error("RESULT: ", util.inspect(results, {depth: 10}))
                     })
                 }
+                */
             }
         },
         computed: {}

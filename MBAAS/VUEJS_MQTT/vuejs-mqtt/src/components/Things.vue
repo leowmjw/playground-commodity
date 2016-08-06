@@ -16,19 +16,21 @@
 
 <template>
 
-    <div class="node-card" :class="(liveliness == 'alive') ? 'node-alive' : 'node-dead' ">
-        <h2>State: {{ state }}</h2>
-        <div>
-            <h3>PIR</h3>
-            {{ data.pir }}
-        </div>
-        <div>
-            <h3>DOOR</h3>
-            {{ data.door }}
+    <div class="node-card">
+        <div :class="(liveliness == 'alive') ? 'node-alive' : 'node-dead' ">
+            <h2>State: {{ state }}</h2>
+            <div>
+                <h3>PIR</h3>
+                {{ data.pir }}
+            </div>
+            <div>
+                <h3>DOOR</h3>
+                {{ data.door }}
+            </div>
         </div>
         <div>
             RAW: {{ (raw == null || raw == undefined ) ? '' : raw | json }}
-            <button @click="refreshData()">Refresh</button>
+            <button @click="refreshData()">{{ (liveliness == 'alive' ? 'Disarm' : 'Arm') }}</button>
         </div>
     </div>
 
@@ -42,7 +44,7 @@
     // Actual libs needed below ...
 
     export default {
-        props: ['influxdb'],
+        props: ['influxdb', 'slot'],
         components: {},
         watch: {},
         events: {
@@ -81,15 +83,15 @@
 
                 }
                 /*
-                if (this.influxdb == null || this.influxdb == undefined) {
-                    console.error("Nothing to Do ...")
-                } else {
-                    this.influxdb.query("show databases", function (err, results) {
-                        console.error("ERROR: ", err)
-                        console.error("RESULT: ", util.inspect(results, {depth: 10}))
-                    })
-                }
-                */
+                 if (this.influxdb == null || this.influxdb == undefined) {
+                 console.error("Nothing to Do ...")
+                 } else {
+                 this.influxdb.query("show databases", function (err, results) {
+                 console.error("ERROR: ", err)
+                 console.error("RESULT: ", util.inspect(results, {depth: 10}))
+                 })
+                 }
+                 */
             }
         },
         computed: {}

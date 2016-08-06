@@ -11,6 +11,15 @@
     footer {
         margin: 50px 0;
     }
+
+    .thing {
+        padding-top: 2em;
+    }
+
+    .thingheat {
+        padding-top: 2em;
+    }
+
 </style>
 
 <template>
@@ -21,8 +30,27 @@
 
         <div class="container">
 
-            <div class="row">
-                <things :influxdb="influxdb"></things>
+            <div class="row thing">
+                <h3>Ninja Nodes</h3>
+                <div class="col-md-3">
+                    <things slot="1"></things>
+                    <things slot="2"></things>
+                </div>
+                <div class="col-md-3">
+                    <things slot="3"></things>
+                    <things slot="4"></things>
+                </div>
+                <div class="col-md-3">
+                    <things slot="5"></things>
+                    <things slot="6"></things>
+                </div>
+                <div class="col-md-3">
+                    <things slot="9"></things>
+                    <things slot="10"></things>
+                </div>
+            </div>
+            <div class="row thingheat">
+                <thingsdataheatmap></thingsdataheatmap>
             </div>
 
             <hr>
@@ -41,11 +69,13 @@
     // Actual subcomponents used
     import Navigation from './components/Navigation.vue'
     import Things from './components/Things.vue'
+    import ThingsDataHeatMap from './components/ThingsDataHeatMap.vue'
 
     export default {
         components: {
             navigation: Navigation,
-            things: Things
+            things: Things,
+            thingsdataheatmap: ThingsDataHeatMap
         },
         data () {
             return {

@@ -20,12 +20,12 @@
         <div :class="(liveliness == 'alive') ? 'node-alive' : 'node-dead' ">
             <h2>State: {{ state }}</h2>
             <div>
-                <h3>PIR</h3>
-                {{ data.pir }}
+                <h4>PIR</h4>
+                <h2>{{ data.pir }}</h2>
             </div>
             <div>
-                <h3>DOOR</h3>
-                {{ data.door }}
+                <h4>DOOR</h4>
+                <h2>{{ data.door }}</h2>
             </div>
         </div>
         <div>
@@ -50,8 +50,57 @@
         events: {
             'new-data': function (type, mydata) {
                 // New data comes in ... from parent compoenent ...
-                console.error("NEW DATA TYPE: %s .... %s", type, util.inspect(mydata, {depth: 10}))
-                this.data = mydata
+                // console.error("NEW DATA TYPE: %s .... %s", type, util.inspect(mydata.fields, {depth: 10}))
+                // this.raw = mydata
+                if (mydata.fields == null || mydata.fields == undefined) {
+                    console.error("FIELDS EMPTY ..")
+
+                } else {
+                    switch (this.slot) {
+                        case "1":
+                            this.data.pir += mydata.fields.pirValue1
+                            this.data.door += mydata.fields.magValue1
+                            break
+                        case "2":
+                            this.data.pir += mydata.fields.pirValue2
+                            this.data.door += mydata.fields.magValue2
+                            break
+                        case "3":
+                            this.data.pir += mydata.fields.pirValue3
+                            this.data.door += mydata.fields.magValue3
+                            break
+                        case "4":
+                            this.data.pir += mydata.fields.pirValue4
+                            this.data.door += mydata.fields.magValue4
+                            break
+                        case "5":
+                            this.data.pir += mydata.fields.pirValue5
+                            this.data.door += mydata.fields.magValue5
+                            break
+                        case "6":
+                            this.data.pir += mydata.fields.pirValue6
+                            this.data.door += mydata.fields.magValue6
+                            break
+                        case "7":
+                            this.data.pir += mydata.fields.pirValue7
+                            this.data.door += mydata.fields.magValue7
+                            break
+                        case "8":
+                            this.data.pir += mydata.fields.pirValue8
+                            this.data.door += mydata.fields.magValue8
+                            break
+                        case "9":
+                            this.data.pir += mydata.fields.pirValue9
+                            this.data.door += mydata.fields.magValue9
+                            break
+                        case "10":
+                            this.data.pir += mydata.fields.pirValue10
+                            this.data.door += mydata.fields.magValue10
+                            break
+                        default:
+                            break
+                    }
+                }
             }
         },
         data () {

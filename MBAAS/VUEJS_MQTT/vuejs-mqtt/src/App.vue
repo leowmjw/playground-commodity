@@ -45,8 +45,8 @@
                     <things slot="6"></things>
                 </div>
                 <div class="col-md-3">
-                    <things slot="9"></things>
-                    <things slot="10"></things>
+                    <things slot="7"></things>
+                    <things slot="8"></things>
                 </div>
             </div>
             <div class="row thingheat">
@@ -91,9 +91,9 @@
 
             // Socket.io readiness ..
             const socket = io('http://106.186.17.6:8080')
-            socket.on('uplink', function (data) {
+            socket.on('uplink', function (mydata) {
                 // Log to the console
-                console.error("Uplink from Device:" + data.devEUI, data)
+                console.error("Uplink from Device:" + mydata.devEUI)
                 // Create a new DOM element
                 // var uplink = document.createElement("div")
                 // var date = new Date(data.metadata.server_time)
@@ -101,7 +101,9 @@
                 // uplink.innerText = dateString + " - Uplink " + data.counter + " from " + data.devEUI + ": " + JSON.stringify(data.fields)
                 // Append to the activity feed
                 // activityFeed.appendChild(uplink)
-            })
+                this.$broadcast('new-data', 'alive', mydata)
+
+            }.bind(this))
             socket.on('activation', function (data) {
                 // Log to the console
                 console.error("Activated Device:" + data.devEUI, data)
